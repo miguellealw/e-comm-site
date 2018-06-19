@@ -1,0 +1,10 @@
+{
+    "extends": ["airbnb-base", "prettier"],
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "linebreak-style": ["error", "windows"],
+        "no-underscore-dangle": "off"
+    }
+}
