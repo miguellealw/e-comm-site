@@ -1,6 +1,10 @@
 # E-Commerce Site
 
-### Made with
+### Made with:
 * React
 * GraphQL and Apollo
 * MongoDB
+---
+#### Start App
+  * Go into server directory
+  * Run `yarn start`
