@@ -35,10 +35,13 @@ const Root = ({ toggleVisibility }) => (
   <Query query={IS_LOGGED_IN}>
     {( { loading, error, data } ) => {
       if(loading) return "Loading...";
-      if(error && error.message !== "GraphQL error: Unauthorized") {
+      if (
+        error && 
+        (error.message !== "GraphQL error: Unauthorized" || error.message === "Unauthorized")
+      ) {
         return `Error - ${error}`
       }
-      const isAuthed = !!data.currentUser 
+      const isAuthed = data !== undefined ? !!data.currentUser : false
 
       return (
         <AuthContext.Provider value={isAuthed}>
