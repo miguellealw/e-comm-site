@@ -6,10 +6,12 @@ import {
   Popup, 
   Icon 
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const ratingStyles = { margin: '.5em 0' };
 const cartButtonStyles = {...ratingStyles};
 const cardContentStyles = { textAlign: 'center' };
+const hrStyles = { borderTop: "1px solid #eee" }
 
 const Product = ({ name, price, image, seller }) => (
     <Card>
@@ -22,8 +24,12 @@ const Product = ({ name, price, image, seller }) => (
         </Card.Meta>
 
         <Card.Meta>
-          <span className='date'>by {seller} </span>
+          <span className='date'>
+            by <Link to={`/${name}`}>{seller}</Link> 
+          </span>
         </Card.Meta>
+
+        <hr style={hrStyles}/>
 
         <Card.Meta>
           <Popup 
@@ -35,7 +41,7 @@ const Product = ({ name, price, image, seller }) => (
                 color="blue"
               />
             }
-            content="Add to Cart"
+            content={`Add ${name} to Cart`}
             size="tiny"
           />
         </Card.Meta>
@@ -57,4 +63,4 @@ const ProductPopup = (product) => {
   );
 };
 
-export default ProductPopup;
+export default Product;
