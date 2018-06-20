@@ -13,6 +13,7 @@ import Home from './Home/Home';
 import LoginPage from './Login/LoginPage';
 import SignupPage from './Signup/SignupPage';
 import ProductPage from './Prouducts/ProductPage';
+import CartPage from './Cart/CartPage';
 import Store from './Prouducts/Store';
 import MenuNav from './Navigation/MenuNav';
 import ProfilePage from './Profile/ProfilePage';
@@ -26,6 +27,7 @@ const globalStyle = {
 const IS_LOGGED_IN = gql`
   query {
     currentUser {
+      _id
       firstName
     }
   }
@@ -51,6 +53,7 @@ const Root = ({ toggleVisibility }) => (
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/store/:name" component={ ProductPage } />
                 <PrivateRoute isAuthed={isAuthed} exact path="/profile" component={ ProfilePage } />
+                <PrivateRoute isAuthed={isAuthed} exact path="/cart" component={ CartPage } />
                 <Route path="/store" component={ Store } />
                 <Route path="/login" component={ LoginPage } />
                 <Route path="/signup" component={ SignupPage }/>
