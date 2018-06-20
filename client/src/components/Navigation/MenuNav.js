@@ -1,15 +1,21 @@
 import React, { Component, Fragment } from 'react';
 import { Menu, Segment } from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom';
-import AuthContext from '../Contexts/AuthContext';
 
-const linkStyles = { height: "100%" }
+/* NavLinks */
+import {
+  HomeNavLink,
+  StoreNavLink,
+  LoginNavLink,
+  SignupNavLink,
+  ProfileNavLink,
+  CartNavLink
+} from './NavLinks';
+
 const menuStyles = { margin: 0 }
 const segmentStyles = {
   margin: 0,
   border: 'none'
 }
-const activeStyle = { background: '#3d3e3f'}
 
 export default class MenuNav extends Component {
   render() {
@@ -17,52 +23,15 @@ export default class MenuNav extends Component {
     return (
     <Fragment>
       <Menu size='large' style={menuStyles} inverted>
-
-        <NavLink to="/" exact activeStyle={activeStyle}>
-          <Menu.Item 
-            name='home' 
-            as="p"
-          />
-        </NavLink>
-
-        <NavLink to="/store" style={linkStyles} activeStyle={activeStyle}>
-          <Menu.Item
-            name='store'
-            as="p"
-          />
-        </NavLink>
+        <HomeNavLink />
+        <StoreNavLink />
 
         {/* Right Nav Links */}
         <Menu.Menu position='right'>
-
-          <NavLink to="/login" activeStyle={activeStyle}>
-            <Menu.Item as="p">
-              Login
-            </Menu.Item>
-          </NavLink>
-
-          <NavLink to="/signup" activeStyle={activeStyle}>
-            <Menu.Item as="p">
-              Signup
-              {/* <Button primary>Sign Up</Button> */}
-            </Menu.Item>
-          </NavLink>
-
-          <AuthContext.Consumer>
-            {(isAuthed) => {
-              if (isAuthed) {
-                  return (
-                    <NavLink to="/profile" activeStyle={activeStyle}>
-                      <Menu.Item as="p">
-                        Profile
-                      </Menu.Item>
-                    </NavLink>
-                  )
-                }
-              }
-            }
-          </AuthContext.Consumer>
-
+          <LoginNavLink />
+          <SignupNavLink />
+          <ProfileNavLink />
+          <CartNavLink />
         </Menu.Menu>
       </Menu>
 
