@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
   Card, 
   Image, 
@@ -50,17 +50,17 @@ const Product = ({ name, price, image, seller }) => (
     </Card>      
 );
 
-const ProductPopup = (product) => {
-  return (
-    <Popup trigger={Product(product)} size="tiny"> 
-      <Popup.Header>
-        Description
-      </Popup.Header>
-      <Popup.Content>
-        {product.description}
-      </Popup.Content>
-    </Popup>
-  );
-};
+// const ProductPopup = (product) => {
+//   return (
+//     <Popup trigger={Product(product)} size="tiny"> 
+//       <Popup.Header>
+//         Description
+//       </Popup.Header>
+//       <Popup.Content>
+//         {product.description}
+//       </Popup.Content>
+//     </Popup>
+//   );
+// };
 
 export default Product;

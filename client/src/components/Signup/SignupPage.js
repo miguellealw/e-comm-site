@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import {Container} from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 
 import SIGNUP_USER from '../../graphql/mutations/signup';
 import SignupForm from './SignupForm'
