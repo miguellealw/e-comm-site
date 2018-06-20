@@ -1,23 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Menu, Segment } from 'semantic-ui-react'
+import { Menu, Segment } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom';
+import AuthContext from '../Contexts/AuthContext';
 
-const linkStyles = {
-  height: "100%"
-}
-
-const menuStyles = {
-  margin: 0,
-}
-
+const linkStyles = { height: "100%" }
+const menuStyles = { margin: 0 }
 const segmentStyles = {
   margin: 0,
   border: 'none'
 }
-
-const activeStyle = {
-  background: '#3d3e3f'
-}
+const activeStyle = { background: '#3d3e3f'}
 
 export default class MenuNav extends Component {
   render() {
@@ -56,11 +48,20 @@ export default class MenuNav extends Component {
             </Menu.Item>
           </NavLink>
 
-          <NavLink to="/profile" activeStyle={activeStyle}>
-            <Menu.Item as="p">
-              Profile
-            </Menu.Item>
-          </NavLink>
+          <AuthContext.Consumer>
+            {(isAuthed) => {
+              if (isAuthed) {
+                  return (
+                    <NavLink to="/profile" activeStyle={activeStyle}>
+                      <Menu.Item as="p">
+                        Profile
+                      </Menu.Item>
+                    </NavLink>
+                  )
+                }
+              }
+            }
+          </AuthContext.Consumer>
 
         </Menu.Menu>
       </Menu>
