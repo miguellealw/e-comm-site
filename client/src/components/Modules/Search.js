@@ -39,24 +39,14 @@ export default class SearchExampleStandard extends Component {
     const { isLoading, value, results } = this.state
 
     return (
-      <Grid>
-        <Grid.Column width={8}>
-          <Search
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-            results={results}
-            value={value}
-            {...this.props}
-          />
-        </Grid.Column>
-        <Grid.Column width={8}>
-          <Header>State</Header>
-          <pre>{JSON.stringify(this.state, null, 2)}</pre>
-          <Header>Options</Header>
-          <pre>{JSON.stringify(source, null, 2)}</pre>
-        </Grid.Column>
-      </Grid>
+      <Search
+        loading={isLoading}
+        onResultSelect={this.handleResultSelect}
+        onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+        results={results}
+        value={value}
+        {...this.props}
+      />
     )
   }
 }
