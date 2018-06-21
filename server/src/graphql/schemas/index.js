@@ -19,6 +19,7 @@ const RootMutation = `
     deleteProduct(_id: ID!): Status
     signup(email: String!, fullName: String!, password: String!, avatar: String): Boolean
     login(email: String!, password: String!): Boolean
+    logout: Boolean
   }
 `
 

@@ -40,7 +40,9 @@ const corsOptions = {
 
 export default app => {
   app.use(bodyParser.json());
+
   app.use(cors(corsOptions));
+
   app.use(session({
     name: "qid",
     secret: keys.SESSION_SECRET,
@@ -51,7 +53,9 @@ export default app => {
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+      // TODO test this later with fetch options in frontend
+      // credentials: 'include'
     }
   }));
   // app.use(auth);
@@ -64,12 +68,12 @@ export default app => {
       console.log('session', req.session);
       return next();
     },  
-    graphqlExpress((req) => ({
+    graphqlExpress((req, res) => ({
       schema,
       context: {
         // user: req.user
-        // res
         userId: req.session.userId,
+        res,
         req
       }
     }))

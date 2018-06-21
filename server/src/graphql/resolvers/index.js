@@ -19,6 +19,7 @@ export default {
     updateProduct: ProductResolvers.updateProduct,
     deleteProduct: ProductResolvers.deleteProduct,
     signup: UserResolvers.signup,
-    login: UserResolvers.login
+    login: UserResolvers.login,
+    logout: UserResolvers.logout
   }
 }
