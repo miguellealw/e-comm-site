@@ -8,7 +8,8 @@ import {
   LoginNavLink,
   SignupNavLink,
   ProfileNavLink,
-  CartNavLink
+  CartNavLink,
+  LogoutNavLink
 } from './NavLinks';
 
 const menuStyles = { margin: 0 }
@@ -22,7 +23,8 @@ export default class MenuNav extends Component {
     const {render: Content} = this.props;
     return (
     <Fragment>
-      <Menu size='large' style={menuStyles} inverted>
+      <Menu size='large' style={ menuStyles }>
+
         <HomeNavLink />
         <StoreNavLink />
 
@@ -32,7 +34,9 @@ export default class MenuNav extends Component {
           <SignupNavLink />
           <ProfileNavLink />
           <CartNavLink />
+          <LogoutNavLink />
         </Menu.Menu>
+
       </Menu>
 
       <Segment style={segmentStyles}>

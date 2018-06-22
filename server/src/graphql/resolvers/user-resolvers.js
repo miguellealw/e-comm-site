@@ -46,14 +46,11 @@ export default {
   },
 
   logout: (_, args, { req, res }) => {
-    let status;
-    req.session.destroy(() => {
-      status = true
-    })
+    req.session.destroy()
     
     // Clear the cookie in the client
-    res.clearCookie('qid', {path: '/'})
-    return status;
+    res.clearCookie('qid', { path: '/' })
+    return true;
   },
 
   currentUser: async (_, args, { userId }) => {

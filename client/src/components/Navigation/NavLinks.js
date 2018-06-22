@@ -1,10 +1,13 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react';
 import AuthContext from '../Contexts/AuthContext';
+import { Mutation } from 'react-apollo';
+import logoutUser from '../../graphql/mutations/logout';
 
 const linkStyles = { height: "100%" }
-const activeStyle = { background: '#3d3e3f'}
+// const activeStyle = { background: '#3d3e3f'}
+const activeStyle = { background: '#f2f2f2f2'}
 
 export const HomeNavLink = () => (
   <NavLink to="/" exact activeStyle={activeStyle}>
@@ -86,6 +89,32 @@ export const CartNavLink = () => (
                 />
               </Menu.Item>
             </NavLink>
+          )
+        }
+      }
+    }
+  </AuthContext.Consumer>
+)
+
+export const LogoutNavLink = ({logout}) => (
+  <AuthContext.Consumer>
+    {(isAuthed) => {
+        if (isAuthed) {
+          return (
+            <Mutation mutation={logoutUser}>
+              {(logout, {loading, error}) => {
+                if(loading) return "Logging out..."
+                if(error) return `Error logging out: ${error}`
+
+                return (
+                  <Link to="/" onClick={logout}>
+                    <Menu.Item as="p">
+                      Logout
+                    </Menu.Item>
+                  </Link>
+                )
+              }}
+            </Mutation>
           )
         }
       }
