@@ -13,6 +13,14 @@ const cartButtonStyles = {...ratingStyles};
 const cardContentStyles = { textAlign: 'center' };
 const hrStyles = { borderTop: "1px solid #eee" }
 
+const handleAddToCart = (e) => {
+  e.preventDefault();
+} 
+
+const handleRating = (e) => {
+  e.preventDefault();
+}
+
 const Product = ({ name, price, image, seller }) => (
     <Card>
       <Image src={image} />
@@ -20,7 +28,13 @@ const Product = ({ name, price, image, seller }) => (
         <Card.Header>{name} · ${price}</Card.Header>
 
         <Card.Meta style={ratingStyles}>
-          <Rating icon="star" defaultRating={4} maxRating={5} size="mini"/>
+          <Rating 
+            icon="star" 
+            defaultRating={4} 
+            maxRating={5} 
+            size="mini"
+            onClick={handleRating}
+          />
         </Card.Meta>
 
         <Card.Meta>
@@ -39,6 +53,7 @@ const Product = ({ name, price, image, seller }) => (
                 size="large"
                 style={cartButtonStyles}
                 color="blue"
+                onClick={handleAddToCart}
               />
             }
             content={`Add ${name} to Cart`}
