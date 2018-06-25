@@ -46,10 +46,13 @@ export default {
   },
 
   logout: (_, args, { req, res }) => {
-    req.session.destroy()
+    req.session.destroy(() => {
+      // Clear the cookie in the client
+      res.clearCookie('qid', { path: '/' });
+      // res.redirect('/');
+      // res.end();
+    });
     
-    // Clear the cookie in the client
-    res.clearCookie('qid', { path: '/' })
     return true;
   },
 
