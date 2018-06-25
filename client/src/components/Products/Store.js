@@ -4,13 +4,9 @@ import { Container, Header } from 'semantic-ui-react';
 
 import ProductList from './ProductList';
 
-const title = {
-  padding: '1em 0em'
-}
+const title = { padding: '1em 0em' }
 
-const page = {
-  minHeight: '100vh'
-}
+const page = { minHeight: '100vh' }
  
 export default class Store extends Component {
   render() {

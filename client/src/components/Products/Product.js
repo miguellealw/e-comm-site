@@ -22,7 +22,14 @@ const handleRating = (e) => {
   e.preventDefault();
 }
 
-const Product = ({ name, price, image, seller }) => (
+const Product = ({ 
+  name, 
+  price, 
+  image, 
+  owner: { 
+    firstName, 
+    lastName 
+  }}) => (
     <Card>
       <Image src={image} />
       <Card.Content style={cardContentStyles}>
@@ -42,7 +49,7 @@ const Product = ({ name, price, image, seller }) => (
 
         <Card.Meta>
           <span className='date'>
-            by <Link to={`/${name}`}>{seller}</Link> 
+            by <Link to={`/${name}`}>{firstName + ' ' + lastName}</Link> 
           </span>
         </Card.Meta>
 
@@ -59,7 +66,7 @@ const Product = ({ name, price, image, seller }) => (
                 onClick={handleAddToCart}
               />
             }
-            content={`Add ${name} to Cart`}
+            content={`Add "${name}" to Cart`}
             size="tiny"
           />
         </Card.Meta>
