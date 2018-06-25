@@ -17,9 +17,17 @@ const UserSchema = new Schema({
     type: String,
     trim: true
   },
-  avatar: String,
+  avatar: {
+    type: String,
+    default: ""
+  },
   password: String,
-}, {timestamps: true})
+  cart: [{
+    type: Schema.Types.ObjectId,
+    ref: "Product",
+    default: []
+  }]
+}, { timestamps: true })
 
 UserSchema.pre('save', function preHashPassword(next) {
   // Will hash password only if password is changed
