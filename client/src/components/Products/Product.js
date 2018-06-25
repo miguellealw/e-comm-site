@@ -4,7 +4,8 @@ import {
   Image, 
   Rating, 
   Popup, 
-  Icon 
+  Icon,
+  Label
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +26,9 @@ const Product = ({ name, price, image, seller }) => (
     <Card>
       <Image src={image} />
       <Card.Content style={cardContentStyles}>
-        <Card.Header>{name} · ${price}</Card.Header>
+        <Card.Header>
+          {name} — <Label tag>${price}</Label>
+        </Card.Header>
 
         <Card.Meta style={ratingStyles}>
           <Rating 
