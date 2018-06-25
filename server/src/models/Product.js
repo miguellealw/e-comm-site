@@ -6,7 +6,6 @@ const ProductSchema = new Schema({
   name: {
     type: String,
     trim: true,
-    minlength: [5, "The name needs to be longer"],
     maxlength: [144, "The name needs to be shorter"],
     required: true
   },
