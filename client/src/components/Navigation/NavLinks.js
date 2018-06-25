@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react';
 import AuthContext from '../Contexts/AuthContext';
 import { Mutation } from 'react-apollo';
@@ -13,7 +13,7 @@ export const HomeNavLink = () => (
   <NavLink to="/" exact activeStyle={activeStyle}>
     <Menu.Item 
       name='home' 
-      as="p"
+      as="span"
     />
   </NavLink>
 )
@@ -22,7 +22,7 @@ export const StoreNavLink = () => (
   <NavLink to="/store" style={linkStyles} activeStyle={activeStyle}>
     <Menu.Item
       name='store'
-      as="p"
+      as="span"
     />
   </NavLink>
 )
@@ -33,7 +33,7 @@ export const LoginNavLink = () => (
       if(!isAuthed) {
         return (
           <NavLink to="/login" activeStyle={activeStyle}>
-            <Menu.Item as="p">
+            <Menu.Item as="span">
               Login
             </Menu.Item>
           </NavLink>
@@ -49,7 +49,7 @@ export const SignupNavLink = () => (
       if(!isAuthed) {
         return (
           <NavLink to="/signup" activeStyle={activeStyle}>
-            <Menu.Item as="p">
+            <Menu.Item as="span">
               Signup
             </Menu.Item>
           </NavLink>
@@ -65,7 +65,7 @@ export const ProfileNavLink = () => (
         if (isAuthed) {
           return (
             <NavLink to="/profile" activeStyle={activeStyle}>
-              <Menu.Item as="p">
+              <Menu.Item as="span">
                 Profile
               </Menu.Item>
             </NavLink>
@@ -82,7 +82,7 @@ export const CartNavLink = () => (
         if (isAuthed) {
           return (
             <NavLink to="/cart" activeStyle={activeStyle}>
-              <Menu.Item as="p">
+              <Menu.Item as="span">
                 <Icon 
                   name="shop" 
                   size="small"
@@ -96,28 +96,58 @@ export const CartNavLink = () => (
   </AuthContext.Consumer>
 )
 
-export const LogoutNavLink = ({logout}) => (
+export const NewProductNavLink = () => (
   <AuthContext.Consumer>
     {(isAuthed) => {
         if (isAuthed) {
           return (
-            <Mutation mutation={logoutUser}>
-              {(logout, {loading, error}) => {
-                if(loading) return "Logging out..."
-                if(error) return `Error logging out: ${error}`
-
-                return (
-                  <Link to="/" onClick={logout}>
-                    <Menu.Item as="p">
-                      Logout
-                    </Menu.Item>
-                  </Link>
-                )
-              }}
-            </Mutation>
+            <NavLink to="/new-product" activeStyle={activeStyle}>
+              <Menu.Item as="span">
+                <Icon 
+                  name="plus circle" 
+                  size="small"
+                />
+              </Menu.Item>
+            </NavLink>
           )
         }
       }
     }
+  </AuthContext.Consumer>
+)
+
+
+/* 
+<========================================>
+  Logout Nav Link
+<========================================>
+*/
+
+const handleLogout = (logout, history) => (_) => {
+  logout();
+  history.push('/');
+}  
+
+const LogoutMenuTab = ({history}) => (
+  <Mutation mutation={logoutUser}>
+    {(logout, { loading, error }) => {
+      if(error) return `Error logging out: ${error}`
+
+      return (
+        <Link to="#" onClick={handleLogout(logout, history)}>
+          <Menu.Item as="span">
+            Logout
+          </Menu.Item>
+        </Link>
+      )
+    }}
+  </Mutation>
+)
+
+const LogoutMenuTabWithRouter = withRouter(LogoutMenuTab)
+
+export const LogoutNavLink = ({logout}) => (
+  <AuthContext.Consumer>
+    {(isAuthed) => isAuthed && <LogoutMenuTabWithRouter />}
   </AuthContext.Consumer>
 )

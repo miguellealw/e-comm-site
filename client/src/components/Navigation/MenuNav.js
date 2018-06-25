@@ -9,7 +9,8 @@ import {
   SignupNavLink,
   ProfileNavLink,
   CartNavLink,
-  LogoutNavLink
+  LogoutNavLink,
+  NewProductNavLink
 } from './NavLinks';
 
 const menuStyles = { margin: 0 }
@@ -32,6 +33,7 @@ export default class MenuNav extends Component {
         <Menu.Menu position='right'>
           <LoginNavLink />
           <SignupNavLink />
+          <NewProductNavLink />
           <ProfileNavLink />
           <CartNavLink />
           <LogoutNavLink />
