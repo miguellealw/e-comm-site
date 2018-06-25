@@ -15,16 +15,10 @@ const textAreaStyles = {
   maxHeight: 300
 }
 
-const dropzoneStyles = {
-  padding: "1em"
-}
-
-function onDrop() {
-  console.log('file dropped on Dropzone!!')
-} 
+const isEmpty = (obj) => Object.keys(obj).length === 0
 
 const ErrorMessage = (errors) => (
-  Object.keys(errors.errors).length !== 0 && (
+  !isEmpty(errors.errors) && (
     <Message 
       negative
       size="tiny"
@@ -35,13 +29,12 @@ const ErrorMessage = (errors) => (
 )
 
 const NewProductForm = ({
-  values,
   errors,
   handleChange,
-  handleSubmit
+  handleSubmit,
+  createProduct
 }) => (
   <Form onSubmit={handleSubmit}>
-
     <ErrorMessage errors={errors} />
 
     <Form.Group widths="equal">
@@ -80,12 +73,6 @@ const NewProductForm = ({
         type="file"
         onChange={handleChange}
       />
-    {/* <Dropzone>
-      {({}) => {
-
-        return "Product Image"
-      }}
-    </Dropzone> */}
 
     <label htmlFor="productDescription">Product Description</label>
     <TextArea 
@@ -100,8 +87,15 @@ const NewProductForm = ({
 );
 
 export default withFormik({
-  handleSubmit: (values, actions) => {
-    console.log(values);
+  handleSubmit: (values, { props: { createProduct } }) => {
+    createProduct({
+      variables: {
+        name: values.name,
+        price: values.price,
+        description: values.description,
+        quantity: values.quantity
+      }
+    })
   },
   validationSchema: () => 
     yup.object().shape({
