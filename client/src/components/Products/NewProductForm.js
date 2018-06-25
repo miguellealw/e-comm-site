@@ -35,14 +35,13 @@ const NewProductForm = ({
   createProduct
 }) => (
   <Form onSubmit={handleSubmit}>
-    <ErrorMessage errors={errors} />
-
     <Form.Group widths="equal">
       <Form.Input 
         label="Product Name"
         name="name"
         onChange={handleChange}
         placeholder="Computer"
+        error={!!errors.name}
       />
       <Form.Input 
         label="Quantity"
@@ -51,15 +50,18 @@ const NewProductForm = ({
         placeholder="1"
         min="1"        
         onChange={handleChange}
+        error={!!errors.quantity}
       />
       
       <Form.Input 
         label="Price"
         name="price"
-        type="price"
+        type="number"
+        step={0.01}
         placeholder="559.99"
         onChange={handleChange}
         labelPosition="right"
+        error={!!errors.price}
       >
         <Label basic>$</Label>
         <input />
@@ -81,6 +83,8 @@ const NewProductForm = ({
       style={textAreaStyles}
       onChange={handleChange}
     />
+
+    <ErrorMessage errors={errors} />
 
     <Button primary type="submit">Add Product</Button>
   </Form>
