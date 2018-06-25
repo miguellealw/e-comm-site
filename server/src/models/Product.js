@@ -7,13 +7,20 @@ const ProductSchema = new Schema({
     type: String,
     trim: true,
     minlength: [5, "The name needs to be longer"],
-    maxlength: [144, "The name needs to be shorter"]
+    maxlength: [144, "The name needs to be shorter"],
+    required: true
   },
   description: String,
   price: Schema.Types.Mixed,
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  picture: String,
   owner: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    required: true
   }
 }, {
   timestamps: true

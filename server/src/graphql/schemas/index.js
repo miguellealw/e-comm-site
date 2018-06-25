@@ -14,7 +14,12 @@ const RootQuery = `
 
 const RootMutation = `
   type Mutation {
-    createProduct(name: String!, description: String): Product
+    createProduct(
+      name: String!, 
+      quantity: Int!, 
+      price: Float!,
+      description: String
+    ): Product
     updateProduct(_id: ID!, name: String, description: String): Product
     deleteProduct(_id: ID!): Status
     signup(email: String!, fullName: String!, password: String!, avatar: String): Boolean

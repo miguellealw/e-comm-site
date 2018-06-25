@@ -5,6 +5,7 @@ const ProductSchema = `
     _id: ID!
     name: String!
     description: String
+    quantity: Int!
     price: Float!
     createdAt: Date!
     updatedAt: Date!

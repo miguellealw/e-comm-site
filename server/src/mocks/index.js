@@ -27,6 +27,7 @@ export default async () => {
           name: faker.commerce.productName(), 
           description: faker.lorem.paragraphs(1), 
           price: faker.commerce.price(),
+          quantity: faker.random.number(),
           owner: owner._id 
         })
       })
