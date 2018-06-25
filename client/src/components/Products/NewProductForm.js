@@ -64,14 +64,14 @@ const NewProductForm = ({
         label="Price"
         name="price"
         type="price"
-        placeholder="9.99"
+        placeholder="559.99"
         onChange={handleChange}
         labelPosition="right"
       >
         <Label basic>$</Label>
         <input />
-        <Label>.00</Label>
       </Form.Input>
+
     </Form.Group>
     
     <Form.Input 
