@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from
 'react-router-dom';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo'
+import {Loader} from 'semantic-ui-react'
 
 /* Misc */
 import '../styles/App.css'
@@ -28,15 +29,15 @@ const IS_LOGGED_IN = gql`
   query {
     currentUser {
       _id
-      firstName
     }
   }
 `
 
-const Root = ({ toggleVisibility }) => (
+const Root = () => (
   <Query query={IS_LOGGED_IN}>
     {( { loading, error, data } ) => {
-      if(loading) return "Loading...";
+      if(loading) return (<Loader active={loading}>Loading Content</Loader>)
+
       // Temp fix to unauthed errors
       if (
         error && 
@@ -44,7 +45,7 @@ const Root = ({ toggleVisibility }) => (
       ) {
         return `Error - ${error}`
       }
-      const isAuthed = data !== undefined ? !!data.currentUser : false
+      const isAuthed =  !!data.currentUser._id
 
       return (
         <AuthContext.Provider value={isAuthed}>

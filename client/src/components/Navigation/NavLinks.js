@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon, Loader } from 'semantic-ui-react';
 import AuthContext from '../Contexts/AuthContext';
-import { Mutation } from 'react-apollo';
+import { Mutation, ApolloConsumer } from 'react-apollo';
 import logoutUser from '../../graphql/mutations/logout';
 
 const linkStyles = { height: "100%" }
@@ -123,22 +123,29 @@ export const NewProductNavLink = () => (
 <========================================>
 */
 
-const handleLogout = (logout, history) => (_) => {
+const handleLogout = (logout, client, history) => (_) => {
   logout();
   history.push('/');
+  // Reset cache to reflect auth status
+  client.resetStore();
 }  
 
 const LogoutMenuTab = ({history}) => (
   <Mutation mutation={logoutUser}>
     {(logout, { loading, error }) => {
+      if(loading) return <Loader active={loading}>Logging Out...</Loader>
       if(error) return `Error logging out: ${error}`
 
       return (
-        <Link to="#" onClick={handleLogout(logout, history)}>
-          <Menu.Item as="span">
-            Logout
-          </Menu.Item>
-        </Link>
+        <ApolloConsumer>
+          {client => (
+            <Link to="#" onClick={handleLogout(logout, client, history)}>
+              <Menu.Item as="span">
+                Logout
+              </Menu.Item>
+            </Link>
+          )}
+        </ApolloConsumer>
       )
     }}
   </Mutation>
@@ -146,7 +153,7 @@ const LogoutMenuTab = ({history}) => (
 
 const LogoutMenuTabWithRouter = withRouter(LogoutMenuTab)
 
-export const LogoutNavLink = ({logout}) => (
+export const LogoutNavLink = () => (
   <AuthContext.Consumer>
     {(isAuthed) => isAuthed && <LogoutMenuTabWithRouter />}
   </AuthContext.Consumer>
