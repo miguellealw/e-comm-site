@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Header, Button, Form, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+// import { withFormik } from 'formik';
 
 const title = {
   padding: '1em 0em'
@@ -14,7 +15,6 @@ const message = {
   textAlign: 'center',
   color: "#ccc"
 }
-
 
 const LoginForm = ({ handleChange, handleLogin }) =>  (
   <Fragment>
