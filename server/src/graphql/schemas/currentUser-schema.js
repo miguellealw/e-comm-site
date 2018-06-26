@@ -1,12 +1,12 @@
 export default`
   type currentUser {
-    _id: ID!
-    email: String!
-    firstName: String!
-    lastName: String!
+    _id: ID
+    email: String
+    firstName: String
+    lastName: String
     avatar: String
-    createdAt: Date!
-    updatedAt: Date!
+    createdAt: Date
+    updatedAt: Date
   }
 `
 

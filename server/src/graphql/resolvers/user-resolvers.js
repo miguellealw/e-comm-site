@@ -46,12 +46,11 @@ export default {
   },
 
   logout: (_, args, { req, res }) => {
-    req.session.destroy(() => {
-      // Clear the cookie in the client
-      res.clearCookie('qid', { path: '/' });
-      // res.redirect('/');
-      // res.end();
-    });
+    req.session.destroy();
+    // Clear the cookie in the client
+    res.clearCookie('qid', { path: '/' });
+    // res.redirect('/');
+    // res.end();
     
     return true;
   },
@@ -59,7 +58,8 @@ export default {
   currentUser: async (_, args, { userId }) => {
     try {
       const currentUser = await requireAuth(userId);
-      return currentUser
+      if(currentUser) return currentUser
+      return false;
     } catch (error) {
       throw error;
     }
