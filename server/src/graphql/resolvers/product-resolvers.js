@@ -15,9 +15,9 @@ const getProduct = async (_, { _id }, { userId }) => {
   }
 }
 
-const getProducts = async (_, args, { userId }) => {
+const getProducts = async () => {
   try {
-    await requireAuth(userId)
+    // await requireAuth(userId)
     return Product.find({}).sort({ createdAt: -1 })
   } catch (error) {
     throw error;
@@ -49,7 +49,7 @@ const updateProduct = async (_, {_id, ...rest}, { userId }) => {
     const product = await Product.findOne({_id, owner: userId});
 
     if(!product) {
-      throw new Error('Product not found!!!!');
+      throw new Error("The product you're trying to update does not exist ");
     }
 
     Object.entries(rest).forEach(([key, value]) => {

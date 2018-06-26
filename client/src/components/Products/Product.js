@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { 
   Card, 
   Image, 
@@ -8,6 +8,8 @@ import {
   Label
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+
+import AuthContext from '../Contexts/AuthContext';
 
 const ratingStyles = { margin: '.5em 0' };
 const cartButtonStyles = {...ratingStyles};
@@ -53,23 +55,30 @@ const Product = ({
           </span>
         </Card.Meta>
 
-        <hr style={hrStyles}/>
 
-        <Card.Meta>
-          <Popup 
-            trigger={
-              <Icon 
-                name="shop" 
-                size="large"
-                style={cartButtonStyles}
-                color="blue"
-                onClick={handleAddToCart}
-              />
-            }
-            content={`Add "${name}" to Cart`}
-            size="tiny"
-          />
-        </Card.Meta>
+        <AuthContext.Consumer>
+          {(isAuthed) => isAuthed && (
+            <Fragment>
+              <hr style={hrStyles}/>
+
+              <Card.Meta>
+                <Popup 
+                  trigger={
+                    <Icon 
+                      name="shop" 
+                      size="large"
+                      style={cartButtonStyles}
+                      color="blue"
+                      onClick={handleAddToCart}
+                    />
+                  }
+                  content={`Add "${name}" to Cart`}
+                  size="tiny"
+                />
+              </Card.Meta>
+            </Fragment>
+          )}
+        </AuthContext.Consumer>
 
       </Card.Content>
     </Card>      
